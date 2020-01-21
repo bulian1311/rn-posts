@@ -1,15 +1,22 @@
 import { StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
-  wrapper: {},
+  wrapper: {
+    marginBottom: 15,
+    overflow: "hidden"
+  },
   image: {
     width: "100%",
     height: 200
   },
   textWrap: {
-    padding: 10
+    backgroundColor: "rgba(0, 0, 0, 0.5)",
+    paddingVertical: 5,
+    alignItems: "center",
+    width: "100%"
   },
   title: {
+    color: "#fff",
     fontFamily: "open-regular"
   }
 });
