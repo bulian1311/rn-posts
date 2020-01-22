@@ -20,18 +20,28 @@ const Bookmarked = ({ navigation }: Props) => {
   return <PostList data={data} onOpen={openPostHandler} />;
 };
 
-Bookmarked.navigationOptions = {
-  title: "Избранное",
-  headerRight: () => (
-    <HeaderButtons HeaderButtonComponent={HeaderIcon}>
-      <Item title="Take photo" iconName="ios-camera" onPress={() => {}} />
-    </HeaderButtons>
-  ),
-  headerLeft: () => (
-    <HeaderButtons HeaderButtonComponent={HeaderIcon}>
-      <Item title="Toggle Drawer" iconName="ios-menu" onPress={() => {}} />
-    </HeaderButtons>
-  )
+Bookmarked.navigationOptions = ({ navigation }) => {
+  return {
+    title: "Избранное",
+    headerRight: () => (
+      <HeaderButtons HeaderButtonComponent={HeaderIcon}>
+        <Item
+          title="Take photo"
+          iconName="ios-camera"
+          onPress={() => navigation.navigate("Create")}
+        />
+      </HeaderButtons>
+    ),
+    headerLeft: () => (
+      <HeaderButtons HeaderButtonComponent={HeaderIcon}>
+        <Item
+          title="Toggle Drawer"
+          iconName="ios-menu"
+          onPress={() => navigation.toggleDrawer()}
+        />
+      </HeaderButtons>
+    )
+  };
 };
 
 export default Bookmarked;

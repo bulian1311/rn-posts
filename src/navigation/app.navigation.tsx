@@ -4,11 +4,14 @@ import { createAppContainer } from "react-navigation";
 import { createStackNavigator } from "react-navigation-stack";
 import { createBottomTabNavigator } from "react-navigation-tabs";
 import { createMaterialBottomTabNavigator } from "react-navigation-material-bottom-tabs";
+import { createDrawerNavigator } from "react-navigation-drawer";
 import { Ionicons } from "@expo/vector-icons";
 
 import Main from "../screens/main";
 import Booked from "../screens/bookmarked";
 import Post from "../screens/post";
+import About from "../screens/about";
+import Create from "../screens/create";
 
 import { THEME } from "../theme";
 
@@ -37,6 +40,20 @@ const BookedNavigator = createStackNavigator(
   {
     Booked,
     Post
+  },
+  navigatorOptions
+);
+
+const AboutNavigator = createStackNavigator(
+  {
+    About
+  },
+  navigatorOptions
+);
+
+const CreateNavigator = createStackNavigator(
+  {
+    Create
   },
   navigatorOptions
 );
@@ -75,6 +92,38 @@ const BottomNavigator =
         }
       });
 
-const AppNavigation = createAppContainer(BottomNavigator);
+const MainNavigator = createDrawerNavigator(
+  {
+    PostTabs: {
+      screen: BottomNavigator,
+      navigationOptions: {
+        drawerLabel: "Все посты"
+        //drawerIcon: <Ionicons name="ios-star" />
+      }
+    },
+    About: {
+      screen: AboutNavigator,
+      navigationOptions: {
+        drawerLabel: "О приложении"
+      }
+    },
+    Create: {
+      screen: CreateNavigator,
+      navigationOptions: {
+        drawerLabel: "Создать пост"
+      }
+    }
+  },
+  {
+    contentOptions: {
+      activeTintColor: THEME.MAIN_COLOR,
+      labelStyle: {
+        fontFamily: "open-bold"
+      }
+    }
+  }
+);
+
+const AppNavigation = createAppContainer(MainNavigator);
 
 export default AppNavigation;

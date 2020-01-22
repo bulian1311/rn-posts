@@ -19,18 +19,28 @@ const Main = ({ navigation }: Props) => {
   return <PostList data={DATA} onOpen={openPostHandler} />;
 };
 
-Main.navigationOptions = {
-  title: "Мой блог",
-  headerRight: () => (
-    <HeaderButtons HeaderButtonComponent={HeaderIcon}>
-      <Item title="Take photo" iconName="ios-camera" onPress={() => {}} />
-    </HeaderButtons>
-  ),
-  headerLeft: () => (
-    <HeaderButtons HeaderButtonComponent={HeaderIcon}>
-      <Item title="Toggle Drawer" iconName="ios-menu" onPress={() => {}} />
-    </HeaderButtons>
-  )
+Main.navigationOptions = ({ navigation }) => {
+  return {
+    title: "Мой блог",
+    headerRight: () => (
+      <HeaderButtons HeaderButtonComponent={HeaderIcon}>
+        <Item
+          title="Take photo"
+          iconName="ios-camera"
+          onPress={() => navigation.navigate("Create")}
+        />
+      </HeaderButtons>
+    ),
+    headerLeft: () => (
+      <HeaderButtons HeaderButtonComponent={HeaderIcon}>
+        <Item
+          title="Toggle Drawer"
+          iconName="ios-menu"
+          onPress={() => navigation.toggleDrawer()}
+        />
+      </HeaderButtons>
+    )
+  };
 };
 
 export default Main;
