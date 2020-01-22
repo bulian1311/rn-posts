@@ -1,9 +1,8 @@
 import React from "react";
-import { View, Text, Button, FlatList } from "react-native";
 import { NavigationStackProp } from "react-navigation-stack";
 import { HeaderButtons, Item } from "react-navigation-header-buttons";
 
-import Post from "../../components/post";
+import PostList from "../../components/post-list";
 import HeaderIcon from "../../components/header-icon";
 import styles from "./main.styles";
 import { DATA } from "../../data";
@@ -17,15 +16,7 @@ const Main = ({ navigation }: Props) => {
     navigation.navigate("Post", { postId: post.id, booked: post.booked });
   };
 
-  return (
-    <View style={styles.wrapper}>
-      <FlatList
-        data={DATA}
-        keyExtractor={post => post.id.toString()}
-        renderItem={({ item }) => <Post post={item} onOpen={openPostHandler} />}
-      />
-    </View>
-  );
+  return <PostList data={DATA} onOpen={openPostHandler} />;
 };
 
 Main.navigationOptions = {
