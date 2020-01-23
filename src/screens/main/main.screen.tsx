@@ -1,22 +1,29 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { NavigationStackProp } from "react-navigation-stack";
 import { HeaderButtons, Item } from "react-navigation-header-buttons";
+import { useDispatch, useSelector } from "react-redux";
 
 import PostList from "../../components/post-list";
 import HeaderIcon from "../../components/header-icon";
-import styles from "./main.styles";
-import { DATA } from "../../data";
+import { loadPosts } from "../../store/actions/post.actions";
 
 type Props = {
   navigation: NavigationStackProp;
 };
 
 const Main = ({ navigation }: Props) => {
+  const dispatch = useDispatch();
+  const allPosts = useSelector(state => state.post.allPosts);
+
   const openPostHandler = (post: any) => {
     navigation.navigate("Post", { postId: post.id, booked: post.booked });
   };
 
-  return <PostList data={DATA} onOpen={openPostHandler} />;
+  useEffect(() => {
+    dispatch(loadPosts());
+  }, [dispatch]);
+
+  return <PostList data={allPosts} onOpen={openPostHandler} />;
 };
 
 Main.navigationOptions = ({ navigation }) => {

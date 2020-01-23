@@ -1,17 +1,17 @@
 import React from "react";
 import { NavigationStackProp } from "react-navigation-stack";
 import { HeaderButtons, Item } from "react-navigation-header-buttons";
+import { useSelector } from "react-redux";
 
 import PostList from "../../components/post-list";
 import HeaderIcon from "../../components/header-icon";
-import { DATA } from "../../data";
 
 type Props = {
   navigation: NavigationStackProp;
 };
 
 const Bookmarked = ({ navigation }: Props) => {
-  const data = DATA.filter(p => p.booked);
+  const data = useSelector(state => state.post.bookedPosts);
 
   const openPostHandler = (post: any) => {
     navigation.navigate("Post", { postId: post.id, booked: post.booked });
